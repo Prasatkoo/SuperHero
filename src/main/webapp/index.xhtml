@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: filip
+  Date: 13.01.2023
+  Time: 10:38
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</h:head>
+
+<h:body>
+    <ui:repeat value="#{superHeroRepository.allPublishers}" var="i">
+            <h:link value="#{i.publisherName}: #{i.count}" class ="btn btn-primary mt-1 me-2" outcome="publishers.xhtml">
+                <f:param name="publishers" value="#{i.id}"/>
+            </h:link>
+
+    </ui:repeat>
+
+    <h:form>
+    <h:commandButton value="ALL" onclick="#{superHeroService.changeVisibility()}" styleClass="btn btn-danger">
+    </h:commandButton>
+    <c:if test="#{superHeroService.change == true}">
+        <ui:repeat value="#{superHeroRepository.allHeros}" var="i">
+            <div>
+                <h1>#{i.heroName}</h1>
+                <h2>#{i.fullname}</h2>
+                <h3>#{i.gender}</h3>
+                <h4>#{i.race}</h4>
+                <h6>#{i.team}</h6>
+            </div>
+        </ui:repeat>
+    </c:if>
+</h:form>
+
+</h:body>
+
+</html>
